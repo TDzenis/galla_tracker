@@ -5,7 +5,7 @@
 </script>
 
 <?php
-include("sql_data/sql_login.php");
+include("db.php");
 
 function sendToConsole($text)
 {
@@ -41,16 +41,16 @@ function createTables($servername, $username, $password, $dbname)
     
     // sql to create table
     $sql = "CREATE TABLE `User` (
-        `ID` INT NOT NULL AUTO_INCREMENT,
-        `Name` TEXT(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-        `Last_name` TEXT(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-        `Email` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-        `Password` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-        `Company_ID` INT zerofill DEFAULT NULL,
-        `Permission_level` INT(2) NOT NULL DEFAULT '0',
-        `Ticket_ID` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-        `Project_ID` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-        PRIMARY KEY (`ID`)
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `name` TEXT(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+        `last_name` TEXT(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+        `email` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+        `password` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+        `company_id` INT zerofill DEFAULT NULL,
+        `permission_level` INT(2) NOT NULL DEFAULT '0',
+        `ticket_id` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+        `project_id` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+        PRIMARY KEY (`id`)
     );";
     
     if ($conn->query($sql) === TRUE) {
@@ -60,13 +60,13 @@ function createTables($servername, $username, $password, $dbname)
     }
     
     $sql = "CREATE TABLE `Company` (
-        `ID` INT NOT NULL AUTO_INCREMENT,
-        `Name` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-        `Admin` INT NOT NULL,
-        `Employees_ID` BLOB NOT NULL,
-        `Project_ID` BLOB,
-        `Created_on` DATE NOT NULL,
-        PRIMARY KEY (`ID`)
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `name` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+        `admin` INT NOT NULL,
+        `employees_id` BLOB NOT NULL,
+        `project_id` BLOB,
+        `created_on` DATE NOT NULL,
+        PRIMARY KEY (`id`)
     );";
     
     if ($conn->query($sql) === TRUE) {
@@ -76,17 +76,17 @@ function createTables($servername, $username, $password, $dbname)
     }
     
     $sql = "CREATE TABLE `Project` (
-        `ID` INT NOT NULL AUTO_INCREMENT,
-        `Name` TEXT NOT NULL,
-        `Description` TEXT NOT NULL,
-        `Ticket_ID` BLOB,
-        `Company_ID` BLOB NOT NULL,
-        `Created_by` INT NOT NULL,
-        `Status` BLOB NOT NULL,
-        `Created_on` DATE,
-        `Finished_on` DATE,
-        `Deadline` DATE,
-        PRIMARY KEY (`ID`)
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `name` TEXT NOT NULL,
+        `description` TEXT NOT NULL,
+        `ticket_id` BLOB,
+        `company_id` BLOB NOT NULL,
+        `created_by` INT NOT NULL,
+        `status` BLOB NOT NULL,
+        `created_on` DATE,
+        `finished_on` DATE,
+        `deadline` DATE,
+        PRIMARY KEY (`id`)
     );";
     
     if ($conn->query($sql) === TRUE) {
@@ -96,21 +96,21 @@ function createTables($servername, $username, $password, $dbname)
     }
  
     $sql = "CREATE TABLE `Ticket` (
-        `ID` INT NOT NULL AUTO_INCREMENT,
-        `Name` TEXT NOT NULL,
-        `Description` TEXT,
-        `Img` BLOB,
-        `Created_on` DATE NOT NULL,
-        `Conpleated_on` DATE,
-        `Deadline` DATE,
-        `Conpleated_by` TEXT,
-        `Created_by` TEXT NOT NULL,
-        `Assigned_to` BLOB,
-        `Status` TEXT NOT NULL,
-        `Importance` INT(1) NOT NULL,
-        `Project_ID` INT NOT NULL,
-        `Estimated_time_needed` TIME,
-        PRIMARY KEY (`ID`)
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `name` TEXT NOT NULL,
+        `description` TEXT,
+        `img` BLOB,
+        `created_on` DATE NOT NULL,
+        `conpleated_on` DATE,
+        `deadline` DATE,
+        `completed_by` TEXT,
+        `created_by` TEXT NOT NULL,
+        `assigned_to` BLOB,
+        `status` TEXT NOT NULL,
+        `importance` INT(1) NOT NULL,
+        `project_id` INT NOT NULL,
+        `estimated_time_needed` TIME,
+        PRIMARY KEY (`id`)
     );";
 
     if ($conn->query($sql) === TRUE) {

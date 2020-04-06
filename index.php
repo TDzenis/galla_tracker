@@ -1,5 +1,5 @@
 <?php
-include ("sql_data/sql_login.php");
+include ("db.php");
 
 //Following code is located in a seperate file and needs for DB to run
 //
@@ -10,6 +10,10 @@ $password = "password";
 $dbname = "DBname";
 */
 include ("functions.php");
-createDB($servername, $username, $password, $dbname);
-createTables($servername, $username, $password, $dbname);
+//createDB($servername, $username, $password, $dbname);
+//createTables($servername, $username, $password, $dbname);
+
+include ("login.html");
+
+
 ?>
