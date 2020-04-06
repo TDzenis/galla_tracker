@@ -65,12 +65,12 @@ function createTables($servername, $username, $password, $dbname)
         `Admin` INT NOT NULL,
         `Employees_ID` BLOB NOT NULL,
         `Project_ID` BLOB,
-        `Created_on` TIMESTAMP NOT NULL,
+        `Created_on` DATE NOT NULL,
         PRIMARY KEY (`ID`)
     );";
     
     if ($conn->query($sql) === TRUE) {
-        sendToConsole("Table User created successfully");
+        sendToConsole("Table Company created successfully");
     } else {
         sendToConsole("Error creating table: " . $conn->error);
     }
@@ -82,31 +82,31 @@ function createTables($servername, $username, $password, $dbname)
         `Ticket_ID` BLOB,
         `Company_ID` BLOB NOT NULL,
         `Created_by` INT NOT NULL,
-        `Status` ENUM CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-        `Created_on` TIMESTAMP NOT NULL,
-        `Finished_on` TIMESTAMP,
-        `Deadline` TIMESTAMP,
+        `Status` BLOB NOT NULL,
+        `Created_on` DATE,
+        `Finished_on` DATE,
+        `Deadline` DATE,
         PRIMARY KEY (`ID`)
     );";
     
     if ($conn->query($sql) === TRUE) {
-        sendToConsole("Table User created successfully");
+        sendToConsole("Table Project created successfully");
     } else {
         sendToConsole("Error creating table: " . $conn->error);
     }
  
-    $sql = "CREATE TABLE `Project` (
+    $sql = "CREATE TABLE `Ticket` (
         `ID` INT NOT NULL AUTO_INCREMENT,
         `Name` TEXT NOT NULL,
         `Description` TEXT,
         `Img` BLOB,
-        `Created_on` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-        `Conpleated_on` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        `Deadline` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `Created_on` DATE NOT NULL,
+        `Conpleated_on` DATE,
+        `Deadline` DATE,
         `Conpleated_by` TEXT,
         `Created_by` TEXT NOT NULL,
         `Assigned_to` BLOB,
-        `Status` ENUM NOT NULL,
+        `Status` TEXT NOT NULL,
         `Importance` INT(1) NOT NULL,
         `Project_ID` INT NOT NULL,
         `Estimated_time_needed` TIME,
@@ -114,7 +114,7 @@ function createTables($servername, $username, $password, $dbname)
     );";
 
     if ($conn->query($sql) === TRUE) {
-        sendToConsole("Table User created successfully");
+        sendToConsole("Table Ticket created successfully");
     } else {
         sendToConsole("Error creating table: " . $conn->error);
     }
