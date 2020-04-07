@@ -5,7 +5,7 @@
 </script>
 
 <?php
-include("db.php");
+include("config.php");
 
 function sendToConsole($text)
 {
@@ -65,7 +65,7 @@ function createTables($servername, $username, $password, $dbname)
         `admin` INT NOT NULL,
         `employees_id` BLOB NOT NULL,
         `project_id` BLOB,
-        `created_on` DATE NOT NULL,
+        `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`id`)
     );";
     
@@ -83,9 +83,9 @@ function createTables($servername, $username, $password, $dbname)
         `company_id` BLOB NOT NULL,
         `created_by` INT NOT NULL,
         `status` BLOB NOT NULL,
-        `created_on` DATE,
-        `finished_on` DATE,
-        `deadline` DATE,
+        `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `finished_on` DATETIME,
+        `deadline` DATETIME,
         PRIMARY KEY (`id`)
     );";
     
@@ -100,9 +100,9 @@ function createTables($servername, $username, $password, $dbname)
         `name` TEXT NOT NULL,
         `description` TEXT,
         `img` BLOB,
-        `created_on` DATE NOT NULL,
-        `conpleated_on` DATE,
-        `deadline` DATE,
+        `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `conpleated_on` DATETIME,
+        `deadline` DATETIME,
         `completed_by` TEXT,
         `created_by` TEXT NOT NULL,
         `assigned_to` BLOB,
