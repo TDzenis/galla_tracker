@@ -5,7 +5,7 @@
 </script>
 
 <?php
-include("config.php");
+require("config.php");
 
 function sendToConsole($text)
 {

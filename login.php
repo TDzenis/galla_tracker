@@ -95,70 +95,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php
-include("header.html");
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 350px; padding: 20px; margin: auto;}
+    </style>
 </head>
 <body>
-  <!-- A grey horizontal navbar that becomes vertical on small screens -->
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LogInModal">
-        Log In
-        </button>
-        <a href="register.php">
-        <button type="button" class="btn btn-primary">
-        Register
-        </button>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- Modal -->
-  <div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="LogInModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="LogInModalLabel">Log In</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="<?php
-            echo htmlspecialchars($_SERVER["PHP_SELF"]);
-            ?>" method="POST">
-            <div class="form-group">
-              <label for="Email">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="<?php
-                echo $email;
-                ?>">
-              <span class="help-block"><?php
-                echo $email_err;
-                ?></span>
-            </div>
-            <div class="form-group">
-              <label for="Password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="<?php
-                echo $password;
-                ?>">
-              <span class="help-block"><?php
-                echo $password_err;
-                ?></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </form>
-        </div>
+  <div class="wrapper">
+    <h2>Sing In</h2>
+    <p>Please fill this form to sing in.</p>
+    <form action="<?php
+      echo htmlspecialchars($_SERVER["PHP_SELF"]);
+      ?>" method="POST">
+      <div class="form-group">
+        <label for="Email">Email Address</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" 
+          placeholder="Enter email" name="email" value="<?php echo $email; ?>">
+        <span class="help-block"><?php
+          echo $email_err;
+          ?></span>
       </div>
-    </div>
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" id="password" 
+          placeholder="Password" name="password" value="<?php echo $password; ?>">
+        <span class="help-block"><?php echo $password_err; ?></span>
+      </div>
+      <div class="form-group">
+          <input type="submit" class="btn btn-primary" value="Submit">
+          <input type="reset" class="btn btn-default" value="Reset">
+      </div>
+      <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+    </form>
   </div>
-  <script type="text/javascript">
-    $('#myModal').on('shown.bs.modal', function() {
-        $('#myInput').trigger('focus')
-    })
-  </script>
-    <?php
-    include("footer.html");
-    ?>
+<?php include("footer.html"); ?>

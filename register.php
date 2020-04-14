@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        .wrapper{ width: 350px; padding: 20px; margin: auto;}
     </style>
 </head>
 <body>
@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <label>email</label>
+                <label>Email Address</label>
                 <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>    
