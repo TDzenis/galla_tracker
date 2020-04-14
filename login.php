@@ -108,6 +108,11 @@ include("header.html");
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LogInModal">
         Log In
         </button>
+        <a href="register.php">
+        <button type="button" class="btn btn-primary">
+        Register
+        </button>
+        </a>
       </li>
     </ul>
   </nav>

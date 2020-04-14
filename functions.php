@@ -42,8 +42,8 @@ function createTables($servername, $username, $password, $dbname)
     // sql to create table
     $sql = "CREATE TABLE `User` (
         `id` INT NOT NULL AUTO_INCREMENT,
-        `name` TEXT(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-        `last_name` TEXT(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+        `name` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+        `last_name` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
         `email` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
         `password` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
         `company_id` INT zerofill DEFAULT NULL,
@@ -101,7 +101,7 @@ function createTables($servername, $username, $password, $dbname)
         `description` TEXT,
         `img` BLOB,
         `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        `conpleated_on` DATETIME,
+        `completed_on` DATETIME,
         `deadline` DATETIME,
         `completed_by` TEXT,
         `created_by` TEXT NOT NULL,
