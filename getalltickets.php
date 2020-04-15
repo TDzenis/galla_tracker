@@ -8,7 +8,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 // Create database
-$sql = "SELECT * FROM `ticket`";
+$sql = "SELECT * FROM `ticket` LIMIT 15;"; //replace LIMIT 3 with how many records you want returned
 
 $result = $conn->query($sql);
 
