@@ -20,7 +20,21 @@ var ticketApp = new Vue({
         })
     },
     saveChanges: function() {
-      //TO-DO
+      let form_data = JSON.stringify($('form').serializeArray());
+      alert(form_data);
+
+      fetch("save_changes.php",
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          method: "POST",
+          body: form_data 
+      })
+      .then(function(res){ console.log(res + "lol1") })
+      .catch(function(res){ console.log(res + "lol2") })
+
     }
   },
   mounted() {
