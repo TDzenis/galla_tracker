@@ -3,6 +3,7 @@
 // Initialize the session
 session_start();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@ session_start();
             <!-- Modal body -->
             <div class="modal-body">
               
-              <form class="form-horizontal">
+              <form :name="'form' + ticket.id" class="form-horizontal">
                 <fieldset>
 
                   <!-- Text input-->
@@ -167,8 +168,8 @@ session_start();
                   <!-- Button (Double) -->
                   <div class="form-group">
                     <div class="col-md-12">
-                      <button id="ticket_save" name="button1id" class="btn btn-success" @click="saveChanges()">Save</button>
-                      <button id="ticket_discard" name="button2id" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      <button id="ticket_save" name="ticket_save" class="btn btn-success" v-on:click="saveChanges(this);">Save</button>
+                      <button id="ticket_discard" name="ticket_discard" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </fieldset>

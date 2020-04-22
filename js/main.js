@@ -19,22 +19,26 @@ var ticketApp = new Vue({
           console.log(err);
         })
     },
-    saveChanges: function() {
-      let form_data = JSON.stringify($('form').serializeArray());
+    saveChanges: function (form) {
+      console.log("form:" + form);
+      console.log("------------------------");
+      var form_data = $(this).serializeArray();
+      console.table(form_data);
       alert(form_data);
-
+      alert();
+      
+/*
       fetch("save_changes.php",
         {
+          method: "post",
           headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
-          method: "POST",
-          body: form_data 
+          body: JSON.stringify(form_data) 
       })
       .then(function(res){ console.log(res + "lol1") })
       .catch(function(res){ console.log(res + "lol2") })
-
+*/
     }
   },
   mounted() {
