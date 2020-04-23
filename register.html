@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+    
     <div class="wrapper">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
@@ -75,7 +76,8 @@ function ValidateData() {
                 if (data.status == "ok") {
                     window.location.href = "/login";
                 } else {
-                    alert(data.error);
+                    console.log(data.error);
+                    document.getElementById("email_err").textContent = "Email already exists. Please log in!";
                 }
             }));
         } else {
@@ -86,8 +88,6 @@ function ValidateData() {
         document.getElementById("password_err").textContent = "Your password does not meet the criteria!";
         document.getElementById("password").focus();
     }
-
-    
 }
 </script>
 </body>
