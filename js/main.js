@@ -6,7 +6,7 @@ var ticketApp = new Vue({
   },
   methods: {
     getTickets: function() {
-      fetch("getalltickets.php")
+      fetch("/getAllTickets")
         .then(response => {
           return response.json()
         })

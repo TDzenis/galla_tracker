@@ -1,3 +1,5 @@
+var path = require('path');
+
 const express = require('express')
 const session = require('express-session')
 const app = express()
@@ -6,7 +8,7 @@ const port = 3000
 const fs = require('fs')
 const mysql = require('mysql');
 
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt') //https://www.npmjs.com/package/bcrypt
 const saltRounds = 10
 
 const dbSettings = require('./config.json')
@@ -21,11 +23,7 @@ app.use(express.json());
 app.get('/', (req, res) => res.redirect("/login"))
 
 app.get('/login', (req, res) => {
-  fs.readFile('login.html', (err, data) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  });
+  res.sendFile(path.join(__dirname + '/login.html'));
 })
   
 app.post('/logInUser', (req, res) => {
@@ -58,11 +56,7 @@ app.post('/logInUser', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
-  fs.readFile('register.html', (err, data) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  });
+  res.sendFile(path.join(__dirname + '/register.html'));
 })
 
 // Takes email and password from the request, hashes the password and 
@@ -99,16 +93,37 @@ app.post('/registerUser', (req, res) => {
   con.close
 })
 
-app.get('/content', (req, res) => {
-  fs.readFile('main.html', (err, data) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  });
+app.get('/main', (req, res) => {
+  res.sendFile(path.join(__dirname + '/main.html'));
+})
+
+//main front-end js file
+app.get('/js/main.js', (req, res) => {
+  res.sendFile(__dirname + '/js/main.js');
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(__dirname + '/favicon.ico');
+});
+
+app.get('/getAllTickets', (req, res) => { 
+  let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT 3 with how many records you want returned
+  
+  con.query(getAllTicketsSql, (err, result) => {
+    
+    if (err) throw err;
+    if (result.length > 0) { 
+      console.log(result);
+      res.json(result);
+    } else {
+      returnJson(res, "fail", "No tickets found!");
+    }
+  })
 })
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
 
+// returns a response containing status and error message if any
 function returnJson(res, status, err) {
   let responseData = {
     status : status,
