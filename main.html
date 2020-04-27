@@ -1,182 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Galla</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Galla</title>
+    
+    <!--
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    -->
 
+    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.css">
+    <!-- development version, includes helpful console warnings -->
+    
 
-
-
-  <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-  
-  <style>
-    .card {
-      display: inline-flex;
-      min-width: 300px;
-      max-width: calc(20% - 10px);
-      max-height: 300px;
-      min-height: 300px;
-      margin: 5px 5px 5px 5px;
-    }
-
-    .card-body {
-      overflow: hidden;
-    }
-  </style>
-  
+    <style>
+        .card {
+            display: inline-flex;
+            min-width: 300px;
+            max-width: calc(20% - 10px);
+            max-height: 300px;
+            min-height: 300px;
+            margin: 5px 5px 5px 5px;
+        }
+        
+        .card-body {
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/main">Galla</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">New ticket<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Change project</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logOutUser">Sign Out</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  
   <div id="ticketApp">
 
-    <div v-for="ticket in tickets" class="card" :id="'ticket'+ticket.id">
-      <div class="card-header">{{ ticket.name }}</div>
-      <div class="card-body">{{ ticket.description }}</div>
-      <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-toggle="modal" 
-          :data-target="'#modal'+ticket.id">Edit</button>
-      </div>
-
-      <!-- The Modal -->
-      <div class="modal" :id="'modal'+ticket.id">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">{{ ticket.name }}</h4>
+        <div v-for="ticket in tickets" class="card" :id="'ticket'+ticket.id">
+            <div class="card-header">{{ ticket.name }}</div>
+            <div class="card-body">{{ ticket.description }}</div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#modal'+ticket.id">Edit</button>
             </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-              
-              <form :name="'form' + ticket.id" class="form-horizontal">
-                <fieldset>
+            <!-- The Modal -->
+            <div class="modal" :id="'modal'+ticket.id">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_name" >Ticket name</label>
-                    <div class="col-md-12">
-                      <input id="ticket_name" name="ticket_name" type="text" placeholder="not set" class="form-control input-md" :value="ticket.name">
-                    </div>
-                  </div>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ ticket.name }}</h4>
+                        </div>
 
-                  <!-- Textarea -->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="textarea">Ticket description</label>
-                    <div class="col-md-12">
-                      <textarea class="form-control" id="ticket_description" name="ticket_description" style="height:200px;">{{ ticket.description }}</textarea>
-                    </div>
-                  </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_id">ID:</label>
-                    <div class="col-md-12">
-                      <input readonly id="ticket_id" name="ticket_id" type="text" placeholder="not set" 
-                        class="form-control input-md" :value="ticket.id">
-                    </div>
-                  </div>
+                            <form :id="'form' + ticket.id" :name="'form' + ticket.id" class="form-horizontal">
+                                <fieldset>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_name">Ticket name</label>
+                                        <div class="col-md-12">
+                                            <input name="ticket_name" type="text" placeholder="not set" class="form-control input-md ticket_name" :value="ticket.name">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_created_on">Created on:</label>
-                    <div class="col-md-12">
-                      <input readonly id="ticket_created_on" name="ticket_created_on" type="text" placeholder="not set" class="form-control input-md" :value="ticket.created_on">
-                    </div>
-                  </div>
+                                    <!-- Textarea -->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_description">Ticket description</label>
+                                        <div class="col-md-12">
+                                            <textarea class="form-control ticket_description" name="ticket_description">{{ ticket.description }}</textarea>
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_completed_on">Completed on</label>
-                    <div class="col-md-12">
-                      <input readonly id="ticket_completed_on" name="ticket_completed_on" type="text" placeholder="not set" class="form-control input-md" :value="ticket.completed_on">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_id">ID:</label>
+                                        <div class="col-md-12">
+                                            <input readonly  name="ticket_id" type="text" placeholder="not set" class="form-control input-md ticket_id" :value="ticket.id">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_deadline">Deadline:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_deadline" name="ticket_deadline" type="text" placeholder="not set" class="form-control input-md" :value="ticket.deadline">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_created_on">Created on:</label>
+                                        <div class="col-md-12">
+                                            <input readonly  name="ticket_created_on" type="text" placeholder="not set" class="form-control input-md ticket_created_on" :value="ticket.created_on">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_completed_by">Completed by:</label>
-                    <div class="col-md-12">
-                      <input readonly id="ticket_completed_by" name="ticket_completed_by" type="text" placeholder="not set" class="form-control input-md" :value="ticket.completed_by">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_completed_on">Completed on</label>
+                                        <div class="col-md-12">
+                                            <input readonly  name="ticket_completed_on" type="text" placeholder="not set" class="form-control input-md ticket_completed_on" :value="ticket.completed_on">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_created_by">Created by:</label>
-                    <div class="col-md-12">
-                      <input readonly id="ticket_created_by" name="ticket_created_by" type="text" placeholder="not set" class="form-control input-md" :value="ticket.created_by">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_deadline">Deadline:</label>
+                                        <div class="col-md-12">
+                                            <input  name="ticket_deadline" type="text" placeholder="not set" class="form-control input-md ticket_deadline" :value="ticket.deadline">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_assigned_to">Assigned to:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_assigned_to" name="ticket_assigned_to" type="text" placeholder="not set" class="form-control input-md" :value="ticket.assigned_to">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_completed_by">Completed by:</label>
+                                        <div class="col-md-12">
+                                            <input readonly  name="ticket_completed_by" type="text" placeholder="not set" class="form-control input-md ticket_completed_by" :value="ticket.completed_by">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_status">Status:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_status" name="ticket_status" type="text" placeholder="not set" class="form-control input-md" :value="ticket.status">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_created_by">Created by:</label>
+                                        <div class="col-md-12">
+                                            <input readonly  name="ticket_created_by" type="text" placeholder="not set" class="form-control input-md ticket_created_by" :value="ticket.created_by">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_importance">Importance:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_importance" name="ticket_importance" type="text" placeholder="not set" class="form-control input-md" :value="ticket.importance">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_assigned_to">Assigned to:</label>
+                                        <div class="col-md-12">
+                                            <input  name="ticket_assigned_to" type="text" placeholder="not set" class="form-control input-md ticket_assigned_to" :value="ticket.assigned_to">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_project_id">Project ID:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_project_id" name="ticket_project_id" type="text" placeholder="not set" class="form-control input-md" :value="ticket.project_id">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_status">Status:</label>
+                                        <div class="col-md-12">
+                                            <input  name="ticket_status" type="text" placeholder="not set" class="form-control input-md ticket_status" :value="ticket.status">
+                                        </div>
+                                    </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-12 control-label" for="ticket_estimated_time_needed">Estimated time needed:</label>
-                    <div class="col-md-12">
-                      <input id="ticket_estimated_time_needed" name="ticket_estimated_time_needed" type="text" 
-                        placeholder="not set" class="form-control input-md" :value="ticket.estimated_time_needed">
-                    </div>
-                  </div>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_importance">Importance:</label>
+                                        <div class="col-md-12">
+                                            <input  name="ticket_importance" type="text" placeholder="not set" class="form-control input-md ticket_importance" :value="ticket.importance">
+                                        </div>
+                                    </div>
 
-                  <!-- Button (Double) -->
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <button id="ticket_save" name="ticket_save" class="btn btn-success" v-on:click="saveChanges(this);">Save</button>
-                      <button id="ticket_discard" name="ticket_discard" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_project_id">Project ID:</label>
+                                        <div class="col-md-12">
+                                            <input name="ticket_project_id" type="text" placeholder="not set" class="form-control input-md ticket_project_id" :value="ticket.project_id">
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for="ticket_estimated_time_needed">Estimated time needed:</label>
+                                        <div class="col-md-12">
+                                            <input name="ticket_estimated_time_needed" type="text" 
+                                                placeholder="not set" class="form-control input-md ticket_estimated_time_needed" :value="ticket.estimated_time_needed">
+                                        </div>
+                                    </div>
+
+                                    <!-- Button (Double) -->
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <button name="ticket_save" class="btn btn-success" v-on:click="saveChanges(ticket.id);">Save</button>
+                                            <button name="ticket_discard" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-                </fieldset>
-              </form>
+                </div>
             </div>
-          </div>
+            <!-- End of Modal -->
         </div>
-      </div>
     </div>
-  </div>
-  <script src="/js/main.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="/js/main.js"></script>
 </body>
+
 </html>

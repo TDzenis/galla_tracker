@@ -37,16 +37,20 @@
 function ValidateData() {
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const passwordFormat = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/
+    const email = document.getElementById("email")
+    const email_err = document.getElementById("email_err")
+    const password = document.getElementById("password")
+    const password_err = document.getElementById("password_err")
 
-    if (document.getElementById("email").value.match(mailFormat)) {
-        document.getElementById("email_err").textContent = "";
+    if (email.value.match(mailFormat)) {
+        email_err.textContent = "";
     } else {
-        document.getElementById("email_err").textContent = "You have entered an invalid email address!";
-        document.getElementById("email").focus();
+        email_err.textContent = "You have entered an invalid email address!";
+        email.focus();
     }
 
-    if (document.getElementById("password").value.match(passwordFormat) && document.getElementById("password").value != "") {
-        document.getElementById("password_err").textContent = "";
+    if (password.value.match(passwordFormat) && password.value != "") {
+        password_err.textContent = "";
         fetch('/logInUser', {
             method: 'POST',
             headers: {
@@ -54,8 +58,8 @@ function ValidateData() {
             },
             body: JSON.stringify({
                 user: {
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value
+                    email: email.value,
+                    password: password.value
                 }
             })
         }).then((res) => {
@@ -66,12 +70,12 @@ function ValidateData() {
                 window.location.href = "/main";
             } else {
                 console.log(data.error);
-                document.getElementById("email_err").textContent = data.error;
+                email_err.textContent = data.error;
             }
         }));
     } else {
-        document.getElementById("password_err").textContent = "Your password does not meet the criteria!";
-        document.getElementById("password").focus();
+        password_err.textContent = "Your password does not meet the criteria!";
+        password.focus();
     }
 }
 </script>

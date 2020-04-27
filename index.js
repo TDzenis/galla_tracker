@@ -14,16 +14,27 @@ const saltRounds = 10
 const dbSettings = require('./config.json')
 
 const con = mysql.createConnection(dbSettings);
+var signedIn = false;
 
 app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-app.get('/', (req, res) => res.redirect("/login"))
+app.get('/', (req, res) => res.redirect("/main"))
+
+app.get('/logOutUser', (req, res) => { 
+  signedIn = false;
+  res.redirect("/login")
+})
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname + '/login.html'));
+  if (signedIn == true) {
+    res.redirect("/main")
+  } else {
+    res.sendFile(path.join(__dirname + '/login.html'));
+  }
+  
 })
   
 app.post('/logInUser', (req, res) => {
@@ -43,6 +54,7 @@ app.post('/logInUser', (req, res) => {
           bcrypt.compare(password, result[0].password).then((result) => {
             if (result) {
               returnJson(res, "ok", "");
+              signedIn = true;
             } else {
               returnJson(res, "fail", "Password is not correct");
             }
@@ -94,7 +106,12 @@ app.post('/registerUser', (req, res) => {
 })
 
 app.get('/main', (req, res) => {
-  res.sendFile(path.join(__dirname + '/main.html'));
+  if (signedIn == true) {
+    res.sendFile(path.join(__dirname + '/main.html'));
+  } else {
+    res.redirect("/login")
+  }
+  
 })
 
 //main front-end js file
@@ -106,20 +123,44 @@ app.get('/favicon.ico', (req, res) => {
   res.sendFile(__dirname + '/favicon.ico');
 });
 
-app.get('/getAllTickets', (req, res) => { 
+app.get('/getAllTickets', (req, res) => {
   let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT 3 with how many records you want returned
   
   con.query(getAllTicketsSql, (err, result) => {
     
     if (err) throw err;
-    if (result.length > 0) { 
-      console.log(result);
+    if (result.length > 0) {
       res.json(result);
+      console.log("Results loaded");
     } else {
       returnJson(res, "fail", "No tickets found!");
     }
   })
-})
+});
+
+app.post('/updateTicket', (req, res) => {
+  /*
+  all fields in the response body
+  ticketId
+  ticketName
+  ticketDescription
+  ticketDeadline
+  ticketAssignedTo
+  ticketStatus
+  ticketEstimatedTimeNeeded
+  ticketImportance
+  */
+  let ticket = req.body.ticket;
+  let updateSql = "UPDATE ticket SET name = ?, description = ?, deadline = ?, assigned_to = ?, status = ?, estimated_time_needed = ?, importance = ? WHERE id = ? ";
+
+  con.query(updateSql, [ticket.ticketName, ticket.ticketDescription, ticket.ticketDeadline,
+    ticket.ticketAssignedTo, ticket.ticketStatus,
+    ticket.ticketEstimatedTimeNeeded, ticket.ticketImportance, ticket.ticketId], (err) => { 
+      if (err) throw err;
+  })
+  returnJson(res, "ok", "")
+  con.close
+});
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
 
