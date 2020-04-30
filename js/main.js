@@ -32,27 +32,27 @@ var ticketApp = new Vue({
       const ticketEstimatedTimeNeeded = document.getElementsByClassName("ticket_estimated_time_needed");
         
         fetch('/updateTicket', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ticket: {
-                          ticketId: id,
-                          ticketName: ticketName[0].value,
-                          ticketDescription: ticketDescription[0].value,
-                          ticketDeadline : ticketDeadline[0].value,
-                          ticketAssignedTo: ticketAssignedTo[0].value,
-                          ticketStatus: ticketStatus[0].value,
-                          ticketEstimatedTimeNeeded: ticketEstimatedTimeNeeded[0].value,
-                          ticketImportance: ticketImportance[0].value
-                        }
-                    })
-                }).then((res) => {
-                    return res.json();
-                }).then((data => {
-                    console.log(data)
-                }));
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              ticket: {
+                ticketId: id,
+                ticketName: ticketName[0].value,
+                ticketDescription: ticketDescription[0].value,
+                ticketDeadline : ticketDeadline[0].value,
+                ticketAssignedTo: ticketAssignedTo[0].value,
+                ticketStatus: ticketStatus[0].value,
+                ticketEstimatedTimeNeeded: ticketEstimatedTimeNeeded[0].value,
+                ticketImportance: ticketImportance[0].value
+              }
+          })
+      }).then((res) => {
+          return res.json();
+      }).then((data => {
+          console.log(data)
+      }));
     }
   },
   mounted() {
