@@ -11,7 +11,16 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt') //https://www.npmjs.com/package/bcrypt
 const saltRounds = 10
 
-const dbSettings = require('./config.json')
+try {
+  const dbSettings = import('./config.json')
+} catch (err) {
+  console.log(err);
+}
+
+
+
+
+
 
 const con = mysql.createConnection(dbSettings);
 var signedIn = false;
@@ -21,7 +30,10 @@ app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-app.get('/', (req, res) => res.redirect("/main"))
+app.get('/', (req, res) => { 
+
+  res.redirect("/main")
+})
 
 app.get('/logOutUser', (req, res) => { 
   signedIn = false;
