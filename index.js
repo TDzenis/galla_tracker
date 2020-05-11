@@ -236,7 +236,7 @@ app.get('/favicon.ico', (req, res) => {
 
 app.get('/getAllTickets', (req, res) => {
   let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT 3 with how many records you want returned
-  
+  /*
   con.query(getAllTicketsSql, (err, result) => {
     
     if (err) throw err;
@@ -246,7 +246,7 @@ app.get('/getAllTickets', (req, res) => {
     } else {
       returnJson(res, "fail", "No tickets found!");
     }
-  })
+  })*/
 });
 
 app.post('/updateTicket', (req, res) => {
