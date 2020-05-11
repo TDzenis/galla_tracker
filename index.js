@@ -120,7 +120,7 @@ app.post('/logInUser', (req, res) => {
 
   let getPasswordSql = {
     name: 'check-if-password-correct',
-    text: 'SELECT password FROM public."user" WHERE email = $1',
+    text: 'SELECT password FROM "user" WHERE email = $1',
     values: [email]
   }
 
@@ -182,13 +182,13 @@ app.post('/registerUser', (req, res) => {
       
       let checkUserSql = {
         name: 'check-if-user-exists',
-        text: 'SELECT * FROM public."user" WHERE email = $1',
+        text: 'SELECT * FROM "user" WHERE email = $1',
         values: [email]
       }
       
       let registerUserSql = {
         name: 'new-user',
-        text: 'INSERT INTO public."user"(email, password) VALUES ($1, $2) ',
+        text: 'INSERT INTO "user"(email, password) VALUES ($1, $2) ',
         values: newUser
       }
     
