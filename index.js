@@ -212,13 +212,14 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.get('/getAllTickets', (req, res) => {
-  let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT # with how many records you want returned
+  let getAllTicketsSql = "SELECT * FROM ticket LIMIT 12;" //replace LIMIT # with how many records you want returned
   
   pool.query(getAllTicketsSql, (err, response) => { 
     if (err) throw err;
-    console.log(response.rows[0]);
-    if (response.rows[0].length > 0) {
-      res.json(result);
+    console.log(response.rows.length);
+    if (response.rows.length > 0) {
+      console.table(response.rows);
+      res.json(response.rows);
       console.log("Results loaded");
     } else {
       returnJson(res, "fail", "No tickets found!");

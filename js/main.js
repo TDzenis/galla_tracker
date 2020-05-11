@@ -14,6 +14,7 @@ var ticketApp = new Vue({
         })
         .then(data => {
           //assigns JSON to variable "tickets"
+          console.log(data)
           ticketApp.tickets = data;
         })
         .catch(err => {
