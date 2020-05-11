@@ -1,4 +1,6 @@
-var path = require('path');
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const cookieSession = require('cookie-session')
 
 const express = require('express')
 const session = require('express-session')
@@ -84,6 +86,7 @@ pool.query('SELECT * FROM "user"', (err, response) => {
   }
 })
 
+app.use(cookieParser())
 
 app.use(express.urlencoded());
 
@@ -209,7 +212,20 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.get('/getAllTickets', (req, res) => {
-  let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT 3 with how many records you want returned
+  let getAllTicketsSql = "SELECT * FROM `ticket` LIMIT 12;" //replace LIMIT # with how many records you want returned
+  
+  pool.query(getAllTicketsSql, (err, response) => { 
+    if (err) throw err;
+    console.log(response.rows[0]);
+    if (response.rows[0].length > 0) {
+      res.json(result);
+      console.log("Results loaded");
+    } else {
+      returnJson(res, "fail", "No tickets found!");
+    }
+  });
+
+  
   /*
   con.query(getAllTicketsSql, (err, result) => {
     
