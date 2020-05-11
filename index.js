@@ -71,7 +71,7 @@ const createCompanyTableSQL = "CREATE TABLE 'company' ( \
 );";
 
 
-pool.query('SELECT * FROM public."user"', (err, response) => { 
+pool.query('SELECT * FROM "user"', (err, response) => { 
   if (err) {
     console.log(err);
     pool.query(createUserTableSQL, (err, response) => { if (err) throw err; });
