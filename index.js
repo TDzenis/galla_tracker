@@ -22,7 +22,7 @@ const createUserTableSQL = 'CREATE TABLE "user" ( \
   email VARCHAR(50) NOT NULL, \
   password TEXT NOT NULL, \
   company_id INTEGER DEFAULT NULL, \
-  permission_level INTEGER NOT NULL DEFAULT '0', \
+  permission_level INTEGER NOT NULL DEFAULT "0", \
   ticket_id TEXT DEFAULT NULL, \
   project_id TEXT DEFAULT NULL, \
   PRIMARY KEY (id) \
