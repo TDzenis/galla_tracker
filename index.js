@@ -6,23 +6,13 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 const fs = require('fs')
-const mysql = require('mysql');
+//const mysql = require('mysql');
+const { Pool, Client } = require('pg')
+const pool = new Pool()
 
 const bcrypt = require('bcrypt') //https://www.npmjs.com/package/bcrypt
 const saltRounds = 10
 
-try {
-  const dbSettings = import('./config.json')
-} catch (err) {
-  console.log(err);
-}
-
-
-
-
-
-
-const con = mysql.createConnection(dbSettings);
 var signedIn = false;
 
 app.use(express.urlencoded());
@@ -50,12 +40,40 @@ app.get('/login', (req, res) => {
 })
   
 app.post('/logInUser', (req, res) => {
-  let con = mysql.createConnection(dbSettings);
   let password = req.body.user.password;
   let email = req.body.user.email;
-  let checkUserSql = "SELECT * FROM user WHERE email = ?;";
-  let getPasswordSql = "SELECT password FROM user WHERE email = ?;"
 
+  let checkUserSql = {
+    name: 'check-if-user-exists',
+    text: 'SELECT * FROM public."user" WHERE email = $1',
+    values: [email]
+  }
+
+  let getPasswordSql = {
+    name: 'check-if-password-correct',
+    text: 'SELECT password FROM public."user" WHERE email = $1',
+    values: [email]
+  }
+
+  pool.query(checkUserSql, (err, response) => {
+    if (err) {
+      console.log(err.stack);
+      console.log(response);
+      returnJson(res, "fail", "User not found");
+    } else {
+      bcrypt.compare(password, response.rows[0].password).then((result) => {
+        if (result) {
+          returnJson(res, "ok", "");
+          signedIn = true;
+        } else {
+          returnJson(res, "fail", "Password is not correct");
+        }
+      })
+    }
+    pool.end()
+  })
+
+  /*
   con.connect((err) => {
     if (err) throw err;
     con.query(checkUserSql, email, (err, result) => { 
@@ -76,7 +94,7 @@ app.post('/logInUser', (req, res) => {
         returnJson(res, "fail", "User does not exist, please register.");
       }
     })
-  })
+  })*/
 })
 
 app.get('/register', (req, res) => {
@@ -86,35 +104,47 @@ app.get('/register', (req, res) => {
 // Takes email and password from the request, hashes the password and 
 // creates the DB entry for a new user
 app.post('/registerUser', (req, res) => {
-  let con = mysql.createConnection(dbSettings);
   let password = req.body.user.password;
   let email = req.body.user.email;
-
-  con.connect( (err) => {
-    if (err) throw err;
     
     bcrypt.hash(password, saltRounds, (err, hash) => {
-      let checkUserSql = "SELECT * FROM user WHERE email = ?;";
-      const registerUserSql = "INSERT INTO user(email, password) VALUES (?);";
       const hashedPassword = "";
       const newUser = [email, hash];
-
-      con.query(checkUserSql, email, (err, result) => {
-        if (err) throw err;
-        if (result.length > 0) { 
-          console.log("user exists");
-          returnJson(res, "fail", "Email already exists")
+      
+      let checkUserSql = {
+        name: 'check-if-user-exists',
+        text: 'SELECT * FROM public."user" WHERE email = $1',
+        values: [email]
+      }
+      
+      let registerUserSql = {
+        name: 'new-user',
+        text: 'INSERT INTO public."user"(email, password) VALUES ($1, $2) ',
+        values: newUser
+      }
+    
+      pool.query(checkUserSql,  (err, response) => {
+        if (err) {
+          console.error(err);
         } else {
-          con.query(registerUserSql, [newUser], (err, result) => {
-            if (err) throw err;
-            console.log("New user added");
-            returnJson(res, "ok", "");
-          });
+          if (response.rows.length > 0) {
+            console.log("user exists");
+            returnJson(res, "fail", "Email already exists");
+          } else {
+            pool.query(registerUserSql,  (err) => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log("New user added");
+                returnJson(res, "ok", "");
+              }
+              pool.end()
+            })
+          }
         }
-      });
+        pool.end()
+      })
     });
-  });
-  con.close
 })
 
 app.get('/main', (req, res) => {

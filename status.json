@@ -1,0 +1,390 @@
+ {
+   "STATUS_NAME": "Backlog",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 100
+ },
+ {
+   "STATUS_NAME": "Bid Stage",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 105
+ },
+ {
+   "STATUS_NAME": "Contingent",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 107
+ },
+ {
+   "STATUS_NAME": "Estimate",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 110
+ },
+ {
+   "STATUS_NAME": "In Planning",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 115
+ },
+ {
+   "STATUS_NAME": "In Setup",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 120
+ },
+ {
+   "STATUS_NAME": "Inactive",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 125
+ },
+ {
+   "STATUS_NAME": "Not Started",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 130
+ },
+ {
+   "STATUS_NAME": "On Hold",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 135
+ },
+ {
+   "STATUS_NAME": "Pipeline",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 138
+ },
+ {
+   "STATUS_NAME": "Proposed",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 140
+ },
+ {
+   "STATUS_NAME": "Prospect",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 143
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 145
+ },
+ {
+   "STATUS_NAME": "Grey",
+   "STATUS_COLOR": "Grey",
+   "STATUS_CODE": 150
+ },
+ {
+   "STATUS_NAME": "Approved",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 200
+ },
+ {
+   "STATUS_NAME": "Confirmed",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 205
+ },
+ {
+   "STATUS_NAME": "Contingent",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 207
+ },
+ {
+   "STATUS_NAME": "Okay to Start",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 210
+ },
+ {
+   "STATUS_NAME": "Pending",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 213
+ },
+ {
+   "STATUS_NAME": "Ready",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 215
+ },
+ {
+   "STATUS_NAME": "Scheduled",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 220
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 225
+ },
+ {
+   "STATUS_NAME": "Tech Setup",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 235
+ },
+ {
+   "STATUS_NAME": "Light Green",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 250
+ },
+ {
+   "STATUS_NAME": "Not Started",
+   "STATUS_COLOR": "Light Green",
+   "STATUS_CODE": 255
+ },
+ {
+   "STATUS_NAME": "Active",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 300
+ },
+ {
+   "STATUS_NAME": "In Development",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 305
+ },
+ {
+   "STATUS_NAME": "In Progress",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 310
+ },
+ {
+   "STATUS_NAME": "In Testing",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 315
+ },
+ {
+   "STATUS_NAME": "Live",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 317
+ },
+ {
+   "STATUS_NAME": "On Track",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 320
+ },
+ {
+   "STATUS_NAME": "Ready for Testing",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 325
+ },
+ {
+   "STATUS_NAME": "Started",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 330
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 335
+ },
+ {
+   "STATUS_NAME": "UAT",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 340
+ },
+ {
+   "STATUS_NAME": "Green",
+   "STATUS_COLOR": "Green",
+   "STATUS_CODE": 350
+ },
+ {
+   "STATUS_NAME": "Active",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 401
+ },
+ {
+   "STATUS_NAME": "Alert",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 400
+ },
+ {
+   "STATUS_NAME": "At Risk",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 403
+ },
+ {
+   "STATUS_NAME": "Issue",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 405
+ },
+ {
+   "STATUS_NAME": "Keep Watch",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 410
+ },
+ {
+   "STATUS_NAME": "Late",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 415
+ },
+ {
+   "STATUS_NAME": "Needs Review",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 420
+ },
+ {
+   "STATUS_NAME": "On Hold",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 423
+ },
+ {
+   "STATUS_NAME": "Over Budget",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 425
+ },
+ {
+   "STATUS_NAME": "Past Due",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 430
+ },
+ {
+   "STATUS_NAME": "Pending Approval",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 435
+ },
+ {
+   "STATUS_NAME": "Priority",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 440
+ },
+ {
+   "STATUS_NAME": "Requires Feedback",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 445
+ },
+ {
+   "STATUS_NAME": "Requires Follow-up",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 450
+ },
+ {
+   "STATUS_NAME": "Requires Research",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 455
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 459
+ },
+ {
+   "STATUS_NAME": "UAT",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 465
+ },
+ {
+   "STATUS_NAME": "Yellow",
+   "STATUS_COLOR": "Yellow",
+   "STATUS_CODE": 460
+ },
+ {
+   "STATUS_NAME": "Active",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 501
+ },
+ {
+   "STATUS_NAME": "Alert",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 500
+ },
+ {
+   "STATUS_NAME": "Blocked",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 505
+ },
+ {
+   "STATUS_NAME": "Cancelled",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 510
+ },
+ {
+   "STATUS_NAME": "Cancelled - Change Order",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 513
+ },
+ {
+   "STATUS_NAME": "Concern",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 515
+ },
+ {
+   "STATUS_NAME": "Late Payment",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 520
+ },
+ {
+   "STATUS_NAME": "On Hold",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 525
+ },
+ {
+   "STATUS_NAME": "Suspended",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 530
+ },
+ {
+   "STATUS_NAME": "Terminated",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 535
+ },
+ {
+   "STATUS_NAME": "Rejected",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 540
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 545
+ },
+ {
+   "STATUS_NAME": "UAT",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 555
+ },
+ {
+   "STATUS_NAME": "Red",
+   "STATUS_COLOR": "Red",
+   "STATUS_CODE": 550
+ },
+ {
+   "STATUS_NAME": "Cancelled",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 601
+ },
+ {
+   "STATUS_NAME": "Cancelled Confirmed",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 602
+ },
+ {
+   "STATUS_NAME": "Closed",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 600
+ },
+ {
+   "STATUS_NAME": "Completed",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 605
+ },
+ {
+   "STATUS_NAME": "Delivered",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 610
+ },
+ {
+   "STATUS_NAME": "Done",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 615
+ },
+ {
+   "STATUS_NAME": "Shipped",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 620
+ },
+ {
+   "STATUS_NAME": "Submitted",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 625
+ },
+ {
+   "STATUS_NAME": "Quality Control",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 630
+ },
+ {
+   "STATUS_NAME": "Blue",
+   "STATUS_COLOR": "Blue",
+   "STATUS_CODE": 650
+ }
