@@ -17,14 +17,14 @@ var signedIn = false;
 
 const createUserTableSQL = 'CREATE TABLE "user" ( \
   id SERIAL, \
-  name VARCHAR(15) DEFAULT NULL, \
-  last_name VARCHAR(15) DEFAULT NULL, \
+  name VARCHAR(15), \
+  last_name VARCHAR(15), \
   email VARCHAR(50) NOT NULL, \
   password TEXT NOT NULL, \
-  company_id INTEGER DEFAULT NULL, \
-  permission_level INTEGER NOT NULL DEFAULT "0", \
-  ticket_id TEXT DEFAULT NULL, \
-  project_id TEXT DEFAULT NULL, \
+  company_id INTEGER, \
+  permission_level INTEGER, \
+  ticket_id TEXT, \
+  project_id TEXT, \
   PRIMARY KEY (id) \
 );';
 
