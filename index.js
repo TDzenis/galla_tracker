@@ -15,13 +15,82 @@ const saltRounds = 10
 
 var signedIn = false;
 
+const createUserTableSQL = "CREATE TABLE 'user' ( \
+  id SERIAL, \
+  name VARCHAR(15) DEFAULT NULL, \
+  last_name VARCHAR(15) DEFAULT NULL, \
+  email VARCHAR(50) NOT NULL, \
+  password TEXT NOT NULL, \
+  company_id INTEGER DEFAULT NULL, \
+  permission_level INTEGER NOT NULL DEFAULT '0', \
+  ticket_id TEXT DEFAULT NULL, \
+  project_id TEXT DEFAULT NULL, \
+  PRIMARY KEY (id) \
+);";
+
+const createProjectTableSQL = "CREATE TABLE 'project' ( \
+  id SERIAL, \
+  name VARCHAR(30) NOT NULL, \
+  description TEXT NOT NULL, \
+  ticket_id JSON, \
+  company_id JSON NOT NULL, \
+  created_by INT NOT NULL, \
+  status INTEGER NOT NULL, \
+  created_on TIMESTAMP, \
+  finished_on TIMESTAMP, \
+  deadline TIMESTAMP, \
+  PRIMARY KEY (id) \
+);";
+
+const createTicketTableSQL = "CREATE TABLE 'ticket' ( \
+  id SERIAL, \
+  name VARCHAR(60) NOT NULL, \
+  description TEXT, \
+  img BYTEA, \
+  created_on TIMESTAMP, \
+  completed_on TIMESTAMP, \
+  deadline TIMESTAMP, \
+  completed_by JSON, \
+  created_by JSON, \
+  assigned_to JSON, \
+  status INTEGER, \
+  importance INTEGER NOT NULL, \
+  project_id INT NOT NULL, \
+  estimated_time_needed INTERVAL, \
+  PRIMARY KEY (id) \
+);";
+
+const createCompanyTableSQL = "CREATE TABLE 'company' ( \
+  id SERIAL, \
+  name VARCHAR(30) NOT NULL, \
+  admin JSON NOT NULL, \
+  employees_id JSON NOT NULL, \
+  project_id JSON, \
+  created_on TIMESTAMP, \
+  PRIMARY KEY (id) \
+);";
+
+
+pool.query('SELECT * FROM public."user"', (err, response) => { 
+  if (err) {
+    console.log(err);
+    pool.query(createUserTableSQL, (err, response) => { if (err) throw err; });
+    pool.query(createCompanyTableSQL, (err, response) => { if (err) throw err; });
+    pool.query(createProjectTableSQL, (err, response) => { if (err) throw err; });
+    pool.query(createTicketTableSQL, (err, response) => { if (err) throw err; });
+    console.log("Tables created!");
+  } else { 
+    console.log("Tables exist");
+  }
+})
+
+
 app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
 app.get('/', (req, res) => { 
-
   res.redirect("/main")
 })
 
