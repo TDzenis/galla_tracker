@@ -113,7 +113,7 @@ app.post('/logInUser', (req, res) => {
   let email = req.body.user.email;
 
   let checkUserSql = {
-    name: 'check-if-user-exists',
+    name: 'check-if-user-exists-login',
     text: 'SELECT * FROM public."user" WHERE email = $1',
     values: [email]
   }
@@ -139,31 +139,7 @@ app.post('/logInUser', (req, res) => {
         }
       })
     }
-    pool.end()
   })
-
-  /*
-  con.connect((err) => {
-    if (err) throw err;
-    con.query(checkUserSql, email, (err, result) => { 
-      if (err) throw err;
-      if (result.length > 0) { 
-        con.query(getPasswordSql, email, (err, result) => { 
-          if (err) throw err;
-          bcrypt.compare(password, result[0].password).then((result) => {
-            if (result) {
-              returnJson(res, "ok", "");
-              signedIn = true;
-            } else {
-              returnJson(res, "fail", "Password is not correct");
-            }
-          })
-        })
-      } else {
-        returnJson(res, "fail", "User does not exist, please register.");
-      }
-    })
-  })*/
 })
 
 app.get('/register', (req, res) => {
@@ -207,11 +183,9 @@ app.post('/registerUser', (req, res) => {
                 console.log("New user added");
                 returnJson(res, "ok", "");
               }
-              pool.end()
             })
           }
         }
-        pool.end()
       })
     });
 })
