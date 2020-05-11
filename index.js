@@ -15,7 +15,7 @@ const saltRounds = 10
 
 var signedIn = false;
 
-const createUserTableSQL = "CREATE TABLE 'user' ( \
+const createUserTableSQL = 'CREATE TABLE "user" ( \
   id SERIAL, \
   name VARCHAR(15) DEFAULT NULL, \
   last_name VARCHAR(15) DEFAULT NULL, \
@@ -26,9 +26,9 @@ const createUserTableSQL = "CREATE TABLE 'user' ( \
   ticket_id TEXT DEFAULT NULL, \
   project_id TEXT DEFAULT NULL, \
   PRIMARY KEY (id) \
-);";
+);';
 
-const createProjectTableSQL = "CREATE TABLE 'project' ( \
+const createProjectTableSQL = 'CREATE TABLE "project" ( \
   id SERIAL, \
   name VARCHAR(30) NOT NULL, \
   description TEXT NOT NULL, \
@@ -40,9 +40,9 @@ const createProjectTableSQL = "CREATE TABLE 'project' ( \
   finished_on TIMESTAMP, \
   deadline TIMESTAMP, \
   PRIMARY KEY (id) \
-);";
+);';
 
-const createTicketTableSQL = "CREATE TABLE 'ticket' ( \
+const createTicketTableSQL = 'CREATE TABLE "ticket" ( \
   id SERIAL, \
   name VARCHAR(60) NOT NULL, \
   description TEXT, \
@@ -58,9 +58,9 @@ const createTicketTableSQL = "CREATE TABLE 'ticket' ( \
   project_id INT NOT NULL, \
   estimated_time_needed INTERVAL, \
   PRIMARY KEY (id) \
-);";
+);';
 
-const createCompanyTableSQL = "CREATE TABLE 'company' ( \
+const createCompanyTableSQL = 'CREATE TABLE "company" ( \
   id SERIAL, \
   name VARCHAR(30) NOT NULL, \
   admin JSON NOT NULL, \
@@ -68,7 +68,7 @@ const createCompanyTableSQL = "CREATE TABLE 'company' ( \
   project_id JSON, \
   created_on TIMESTAMP, \
   PRIMARY KEY (id) \
-);";
+);';
 
 
 pool.query('SELECT * FROM "user"', (err, response) => { 
