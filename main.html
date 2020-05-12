@@ -99,26 +99,17 @@
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-12 control-label" for="ticket_id">ID:</label>
-                                        <div class="col-md-12">
-                                            <input readonly  name="ticket_id" type="text" placeholder="not set" class="form-control input-md ticket_id" :value="ticket.id">
-                                        </div>
+                                        <label class="col-md-12 control-label" for="ticket_id">Ticket ID: {{ ticket.id }}</label>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-12 control-label" for="ticket_created_on">Created on:</label>
-                                        <div class="col-md-12">
-                                            <input readonly  name="ticket_created_on" type="text" placeholder="not set" class="form-control input-md ticket_created_on" :value="ticket.created_on">
-                                        </div>
+                                        <label class="col-md-12 control-label" for="ticket_created_on">Created on: {{ ticket.created_on }}</label>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-12 control-label" for="ticket_completed_on">Completed on</label>
-                                        <div class="col-md-12">
-                                            <input readonly  name="ticket_completed_on" type="text" placeholder="not set" class="form-control input-md ticket_completed_on" :value="ticket.completed_on">
-                                        </div>
+                                        <label class="col-md-12 control-label" for="ticket_completed_on">Completed on: {{ ticket.completed_on }}</label>
                                     </div>
 
                                     <!-- Text input-->
@@ -133,7 +124,11 @@
                                     <div class="form-group">
                                         <label class="col-md-12 control-label" for="ticket_completed_by">Completed by:</label>
                                         <div class="col-md-12">
-                                            <input readonly  name="ticket_completed_by" type="text" placeholder="not set" class="form-control input-md ticket_completed_by" :value="ticket.completed_by">
+                                            <ul>
+                                                <li name="ticket_completed_by" v-for="user in ticket.completed_by" :key="user">
+                                                    {{ user }}
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -141,7 +136,11 @@
                                     <div class="form-group">
                                         <label class="col-md-12 control-label" for="ticket_created_by">Created by:</label>
                                         <div class="col-md-12">
-                                            <input readonly  name="ticket_created_by" type="text" placeholder="not set" class="form-control input-md ticket_created_by" :value="ticket.created_by">
+                                            <ul>
+                                                <li name="ticket_created_by" v-for="user in ticket.created_by" :key="user">
+                                                    {{ user }}
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -149,7 +148,11 @@
                                     <div class="form-group">
                                         <label class="col-md-12 control-label" for="ticket_assigned_to">Assigned to:</label>
                                         <div class="col-md-12">
-                                            <input  name="ticket_assigned_to" type="text" placeholder="not set" class="form-control input-md ticket_assigned_to" :value="ticket.assigned_to">
+                                            <ul>
+                                                <li name="ticket_assigned_to" v-for="user in ticket.assigned_to" :key="user">
+                                                    {{ user }}
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -171,18 +174,18 @@
 
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-12 control-label" for="ticket_project_id">Project ID:</label>
-                                        <div class="col-md-12">
-                                            <input name="ticket_project_id" type="text" placeholder="not set" class="form-control input-md ticket_project_id" :value="ticket.project_id">
-                                        </div>
+                                        <label class="col-md-12 control-label" for="ticket_project_id">Project ID: {{ ticket.project_id }}</label>
                                     </div>
 
                                     <!-- Text input-->
                                     <div class="form-group">
                                         <label class="col-md-12 control-label" for="ticket_estimated_time_needed">Estimated time needed:</label>
                                         <div class="col-md-12">
-                                            <input name="ticket_estimated_time_needed" type="text" 
-                                                placeholder="not set" class="form-control input-md ticket_estimated_time_needed" :value="ticket.estimated_time_needed">
+                                            <ul>
+                                                <li name="ticket_assigned_to" v-for="(value, name) in ticket.estimated_time_needed">
+                                                    {{ name }}: {{ value }}
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
 

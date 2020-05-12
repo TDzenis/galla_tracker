@@ -1,14 +1,11 @@
 const path = require('path')
-const cookieParser = require('cookie-parser')
-const cookieSession = require('cookie-session')
+const fs = require('fs')
 
 const express = require('express')
 const session = require('express-session')
 const app = express()
 const port = process.env.PORT || 3000;
 
-const fs = require('fs')
-//const mysql = require('mysql');
 const { Pool, Client } = require('pg')
 const pool = new Pool()
 
@@ -75,33 +72,44 @@ const createCompanyTableSQL = 'CREATE TABLE "company" ( \
 
 pool.query('SELECT * FROM "user"', (err, response) => { 
   if (err) {
-    console.log(err);
-    pool.query(createUserTableSQL, (err, response) => { if (err) throw err; });
-    pool.query(createCompanyTableSQL, (err, response) => { if (err) throw err; });
-    pool.query(createProjectTableSQL, (err, response) => { if (err) throw err; });
-    pool.query(createTicketTableSQL, (err, response) => { if (err) throw err; });
+    console.error(err);
+    pool.query(createUserTableSQL, (err) => { if (err) throw err; });
+    pool.query(createCompanyTableSQL, (err) => { if (err) throw err; });
+    pool.query(createProjectTableSQL, (err) => { if (err) throw err; });
+    pool.query(createTicketTableSQL, (err) => { if (err) throw err; });
     console.log("Tables created!");
   } else { 
     console.log("Tables exist");
   }
 })
 
-app.use(cookieParser())
-
 app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
+//main front-end js file
+app.get('/js/main.js', (req, res) => {
+  res.sendFile(__dirname + '/js/main.js');
+});
+
+//favicon.ico
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(__dirname + '/favicon.ico');
+});
+
+//landing page
 app.get('/', (req, res) => { 
   res.redirect("/main")
 })
 
+//signs out user
 app.get('/logOutUser', (req, res) => { 
   signedIn = false;
   res.redirect("/login")
 })
 
+//checks if login info is saved, otherwise displays login page
 app.get('/login', (req, res) => {
   if (signedIn == true) {
     res.redirect("/main")
@@ -111,6 +119,7 @@ app.get('/login', (req, res) => {
   
 })
   
+//signs in user
 app.post('/logInUser', (req, res) => {
   let password = req.body.user.password;
   let email = req.body.user.email;
@@ -129,8 +138,7 @@ app.post('/logInUser', (req, res) => {
 
   pool.query(checkUserSql, (err, response) => {
     if (err) {
-      console.log(err.stack);
-      console.log(response);
+      console.error(err);
       returnJson(res, "fail", "User not found");
     } else {
       bcrypt.compare(password, response.rows[0].password).then((result) => {
@@ -145,6 +153,7 @@ app.post('/logInUser', (req, res) => {
   })
 })
 
+//displays register page
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname + '/register.html'));
 })
@@ -193,6 +202,7 @@ app.post('/registerUser', (req, res) => {
     });
 })
 
+//main content page
 app.get('/main', (req, res) => {
   if (signedIn == true) {
     res.sendFile(path.join(__dirname + '/main.html'));
@@ -202,66 +212,36 @@ app.get('/main', (req, res) => {
   
 })
 
-//main front-end js file
-app.get('/js/main.js', (req, res) => {
-  res.sendFile(__dirname + '/js/main.js');
-});
-
-app.get('/favicon.ico', (req, res) => {
-  res.sendFile(__dirname + '/favicon.ico');
-});
-
+//returns all tickets that meet the criteria (currently returns all tickets in db)
 app.get('/getAllTickets', (req, res) => {
   let getAllTicketsSql = "SELECT * FROM ticket LIMIT 12;" //replace LIMIT # with how many records you want returned
   
   pool.query(getAllTicketsSql, (err, response) => { 
     if (err) throw err;
-    console.log(response.rows.length);
     if (response.rows.length > 0) {
-      console.table(response.rows);
       res.json(response.rows);
       console.log("Results loaded");
     } else {
       returnJson(res, "fail", "No tickets found!");
     }
   });
-
-  
-  /*
-  con.query(getAllTicketsSql, (err, result) => {
-    
-    if (err) throw err;
-    if (result.length > 0) {
-      res.json(result);
-      console.log("Results loaded");
-    } else {
-      returnJson(res, "fail", "No tickets found!");
-    }
-  })*/
 });
 
 app.post('/updateTicket', (req, res) => {
-  /*
-  all fields in the response body
-  ticketId
-  ticketName
-  ticketDescription
-  ticketDeadline
-  ticketAssignedTo
-  ticketStatus
-  ticketEstimatedTimeNeeded
-  ticketImportance
-  */
-  let ticket = req.body.ticket;
-  let updateSql = "UPDATE ticket SET name = ?, description = ?, deadline = ?, assigned_to = ?, status = ?, estimated_time_needed = ?, importance = ? WHERE id = ? ";
-
-  con.query(updateSql, [ticket.ticketName, ticket.ticketDescription, ticket.ticketDeadline,
-    ticket.ticketAssignedTo, ticket.ticketStatus,
-    ticket.ticketEstimatedTimeNeeded, ticket.ticketImportance, ticket.ticketId], (err) => { 
-      if (err) throw err;
-  })
   returnJson(res, "ok", "")
-  con.close
+  let ticket = req.body;
+
+  console.log(req.body);
+
+  let updateSql = {
+    name: 'update-ticket',
+    text: 'UPDATE ticket SET name = $1, description = $2 WHERE id = $3;',
+    values: [ticket.ticketName, ticket.ticketDescription, ticket.ticketId]
+  };
+
+  pool.query(updateSql, (err, response) => { 
+    if (err) throw err;
+  });
 });
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
