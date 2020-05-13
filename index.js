@@ -231,8 +231,6 @@ app.post('/updateTicket', (req, res) => {
   returnJson(res, "ok", "")
   let ticket = req.body;
 
-  console.log(req.body);
-
   let updateSql = {
     name: 'update-ticket',
     text: 'UPDATE ticket SET name = $1, description = $2 WHERE id = $3;',
